@@ -14,13 +14,20 @@
     $cpf = $_POST["cpf"];
     $tel = $_POST["tel"];
     $nacionalidade = $_POST["nacionalidade"];
-    $peso = $_POST["peso"];
-    $altura = $_POST["altura"];
+    $peso = str_replace(",", ".", $_POST["peso"]);
+    $altura = str_replace(",", ".", $_POST["altura"]);
 
     $sql = "UPDATE aluno SET nome='$nome', profissao='$profissao', nascimento='$nascimento', endereco='$endereco', sexo='$sexo', estado_civil='$estado_civil', cpf='$cpf', tel='$tel', nacionalidade='$nacionalidade', peso='$peso', altura='$altura' WHERE pk_pessoa = $id";
 
     mysqli_query($conn, $sql);
 
-    if(mysqli_error($conn)=="")
-        header("location: index.php");
+    if(mysqli_error($conn)==""){
+        $status = "ok";
+        $msg = "Registo Alterado com Sucesso";
+    }
+    else {
+        $status = "erro";
+        $msg = "Erro:". mysqli_error($conn); 
+    }
+    header("location: index.php?status=$status&msg=$msg");
 ?>
