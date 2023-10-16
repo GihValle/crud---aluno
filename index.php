@@ -59,7 +59,7 @@
         <div id="success-msg"></div>
       </div>
 
-      <div id="danger" class="alert alert-danger" role="alert">
+      <div id="danger" class="alert alert-danger" role="alert" onClick="fecharDanger();">
         <svg class="bi flex-shrink-0 me-2" widht="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
         <div id="danger-msg"></div>
       </div>
@@ -86,7 +86,7 @@
               <td><?php echo $row['nascimento']; ?></td>
               <td> <a href="form_alterar.php?id=<?php echo $row['pk_pessoa']; ?>">ALTERAR</a> 
               | 
-              <a href="deletar.php?id=<?php echo $row['pk_pessoa']; ?>"> APAGAR </td>
+              <a href="deletar.php?id=<?php echo $row['pk_pessoa']; ?>"> APAGAR </a></td>
               </tr>
           <?php
               }
@@ -108,6 +108,15 @@
 
     function fecharSuccess(){
       document.getElementById("success").style.display = 'none';
+    }
+
+    if(msg!='' && status=='erro'){
+      document.getElementById("danger").style.display = 'flex';
+      document.getElementById('danger-msg').innerHTML = msg;
+    }
+
+    function fecharDanger(){
+      document.getElementById("danger").style.display = 'none';
     }
 
   </script>

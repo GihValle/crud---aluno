@@ -8,7 +8,7 @@
     $profissao = $_POST["profissao"];
     $nascimento = $_POST["nascimento"];
     $endereco = $_POST["endereco"];
-    $sexo = $_POST["sexo"];
+    $genero = $_POST["genero"];
     $estado_civil = $_POST["estado_civil"];
     $cpf = $_POST["cpf"];
     $tel = $_POST["tel"];
@@ -16,8 +16,9 @@
     $peso = str_replace(",", ".", $_POST["peso"]);
     $altura = str_replace(",", ".", $_POST["altura"]);
 
-    $sql = "INSERT INTO aluno(nome, profissao, nascimento, endereco, sexo, estado_civil, cpf, tel, nacionalidade, peso, altura)
-    VALUES('$nome', '$profissao', '$nascimento', '$endereco', '$sexo', '$estado_civil', '$cpf', '$tel', '$nacionalidade', $peso, $altura)";
+    $sql = "INSERT INTO aluno(nome, profissao, nascimento, endereco, fk_genero, estado_civil, cpf, tel, nacionalidade, peso, altura)
+    VALUES('$nome', '$profissao', '$nascimento', '$endereco', '$genero', '$estado_civil', '$cpf', '$tel', '$nacionalidade', $peso, $altura)";
+    mysqli_query($conn, $sql);
 
     if(mysqli_error($conn)==""){
         $status = "ok";

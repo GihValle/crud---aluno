@@ -12,9 +12,12 @@
 
     $id = $_GET["id"]; //Chave primariária do registro procurado (pessoa)
     
-    $sql = "SELECT pk_pessoa, nome, profissao, nascimento, endereco, sexo, estado_civil, cpf, tel, nacionalidade, peso, altura FROM aluno WHERE pk_pessoa=".$id;
-    $query = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($query);
+    $sql = "SELECT pk_pessoa, nome, profissao, nascimento, endereco, fk_genero, estado_civil, cpf, tel, nacionalidade, peso, altura FROM aluno WHERE pk_pessoa=".$id;
+    $query = mysqli_query($conn, $sql); //Busca consulta no banco
+    $row = mysqli_fetch_assoc($query); //Converte em array associativo
+
+    $sql = "SELECT pk_genero, genero FROM genero";
+    $queryGenero = mysqli_query($conn, $sql); //Busca no banco de dados
 
     // echo "<pre>";
     // var_dump($row);
@@ -57,12 +60,15 @@
             </div>
 
             <div class="mb-3">
-                <label for="sexo" class="form-label">Sexo</label>
-                <select name="sexo" id="sexo" class="form-select">
-                    <option value="Masculino" <?php echo $row["sexo"]=="Masculino" ? "selected" : ""; ?>> Masculino </option>
-                    <option value="Feminino" <?php echo $row["sexo"]=="Feminino" ? "selected" : ""; ?>>Feminino</option>
-                    <option value="Transgenero" <?php echo $row["sexo"]=="Transgenero" ? "selected" : ""; ?>>Transgênero</option>
-                    <option value="Nao Binario" <?php echo $row["sexo"]=="Nao Binario" ? "selected" : ""; ?>>Não-binário</option>
+                <label for="genero" class="form-label">Sexo</label>
+                <select name="genero" id="genero" class="form-select">
+                    <option value="">Escolha uma opção</option>
+                    <?php while ($rowGenero = mysqli_fetch_assoc($queryGenero)){ ?>
+                        <option value="<?php echo $rowGenero['pk_genero']?>"
+                        <?php echo $row['fk_genero'] == $rowGenero["pk_genero"] ? "selected" : "" ?>>
+                            <?php echo $rowGenero['genero']?>
+                        </option>
+                    <?php } ?>
                 </select>
             </div>
 

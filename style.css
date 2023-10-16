@@ -6,3 +6,8 @@
 #success:hover{
     cursor: pointer;
 }
+
+#danger{
+    display: none;
+    align-items: center;
+}

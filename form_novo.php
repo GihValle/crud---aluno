@@ -1,3 +1,12 @@
+<?php
+    include_once("conexao.php");
+
+    $sql = "SELECT pk_genero, genero FROM genero";
+
+    $query = mysqli_query($conn, $sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -32,12 +41,12 @@
             </div>
 
             <div class="mb-3">
-                <label for="sexo" class="form-label">Sexo</label>
-                <select name="sexo" id="sexo" class="form-select">
-                    <option value="Masculino">Masculino</option>
-                    <option value="Feminino">Feminino</option>
-                    <option value="Transgenero">Transgênero</option>
-                    <option value="Nao Binario">Não-binário</option>
+                <label for="genero" class="form-label">Gênero</label>
+                <select name="genero" id="genero" class="form-select">
+                    <option value="">Escolha uma opção</option>
+                    <?php while ($row = mysqli_fetch_assoc($query)){ ?>
+                        <option value="<?php echo $row['pk_genero']?>"><?php echo $row['genero']?></option>
+                    <?php } ?>
                 </select>
             </div>
 
