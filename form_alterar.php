@@ -10,7 +10,7 @@
 
     //FIM - TRATAMENTO DE ERROS
 
-    $id = $_GET["id"]; //Chave primariária do registro procurado (pessoa)
+    $id = base64_decode($_GET["id"]); //Chave primariária do registro procurado (pessoa)
     
     $sql = "SELECT pk_pessoa, nome, profissao, nascimento, endereco, fk_genero, estado_civil, cpf, tel, nacionalidade, peso, altura FROM aluno WHERE pk_pessoa=".$id;
     $query = mysqli_query($conn, $sql); //Busca consulta no banco

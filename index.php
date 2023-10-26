@@ -1,13 +1,13 @@
 <?php
   include_once("conexao.php");
 
-    $sql = "select pk_pessoa, nome, profissao, nascimento, genero from aluno
+  $sql = "select pk_pessoa, nome, profissao, nascimento, genero from aluno
             LEFT JOIN genero ON aluno.fk_genero=genero.pk_genero";
   $query = mysqli_query($conn, $sql);
 
   if(isset($_GET['status']) && isset($_GET["msg"])){
-    $status = $_GET['status'];
-    $msg = $_GET["msg"];
+    $status = base64_decode($_GET['status']);
+    $msg = base64_decode($_GET["msg"]);
   }
   else{
     $status = "";
@@ -88,9 +88,9 @@
               <td><?php echo $row['profissao']; ?></td>
               <td><?php echo $row['nascimento']; ?></td>
               <td><?php echo $row['genero']; ?></td>
-              <td> <a class="btn btn-outline-secondary btn-sm" href="form_alterar.php?id=<?php echo $row['pk_pessoa']; ?>"><i class="bi bi-pencil-square"></i></a> 
+              <td> <a class="btn btn-outline-secondary btn-sm" href="form_alterar.php?id=<?php echo base64_encode($row['pk_pessoa']); ?>"><i class="bi bi-pencil-square"></i></a> 
             
-              <a class="btn btn-outline-danger btn-sm" href="deletar.php?id=<?php echo $row['pk_pessoa']; ?>"><i class="bi bi-trash"></i></a></td>
+              <a class="btn btn-outline-danger btn-sm" href="deletar.php?id=<?php echo base64_encode($row['pk_pessoa']); ?>"><i class="bi bi-trash"></i></a></td>
               </tr>
           <?php
               }
